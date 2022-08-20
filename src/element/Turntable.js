@@ -149,6 +149,12 @@ class TurntableX extends THREE.Group {
 		this.hoop.events.mouseup.add( ( event ) => {
 			this.dragEnd( event );
 		} );
+		this.hoop.events.touchstart.add( ( event ) => {
+			this.onDown( event );
+		} );
+		this.hoop.events.touchend.add( ( event ) => {
+			this.dragEnd( event );
+		} );
 		this.pole4.events = this.pole3.events = this.pole2.events = this.pole1.events =
 			this.rod2.events = this.rod1.events = this.hoop.events;
 	}
@@ -397,10 +403,18 @@ class TurntableY extends THREE.Group {
 
 	addEvent() {		
 		this.hoop.events = new NOVA.Events();
+
 		this.hoop.events.mousedown.add( ( event ) => {
 			this.onDown( event );
 		} );
 		this.hoop.events.mouseup.add( ( event ) => {
+			this.dragEnd( event );
+		} );
+
+		this.hoop.events.touchstart.add( ( event ) => {
+			this.onDown( event );
+		} );
+		this.hoop.events.touchend.add( ( event ) => {
 			this.dragEnd( event );
 		} );
 
@@ -432,9 +446,6 @@ class TurntableY extends THREE.Group {
 		dom.addEventListener( "touchend", this.dragEnd, false );
 		dom.addEventListener( "mousemove", this.dragMove, false );
 		dom.addEventListener( "touchmove", this.dragMove, false );
-
-		console.log(4444444)
-
 	}
 
 	dragEnd( event ) {
@@ -482,8 +493,6 @@ class TurntableY extends THREE.Group {
 	}
 
 	dragMove( event ) {
-		console.log(222222)
-
 		if ( event.touches ) {
 			var e = event.touches[ 0 ];
 		} else {

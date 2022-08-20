@@ -125,9 +125,16 @@
 		}
 
 		toNovaEvent( event ) {
+
+			var clientX = event.clientX;
+			var clientY = event.clientY;
+			if (event.changedTouches && event.changedTouches[0]) {
+				clientX = event.changedTouches[0].clientX;
+				clientY = event.changedTouches[0].clientY;
+			}
 			return {
 				changedPointers: [ event ],
-				center: new THREE.Vector2( event.clientX, event.clientY ),
+				center: new THREE.Vector2( clientX, clientY ),
 				type: event.type,
 				target: event.target
 			};
