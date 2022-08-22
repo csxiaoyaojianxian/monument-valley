@@ -30,10 +30,10 @@ class ActonGroup {
 const app = new NOVA.App();
 window.app = app;
 //    app.renderer.sortObjects = false;
-const size = app.getWorldHeight() / 20;
+const size = app.getWorldHeight() / 21;
 const level = new GameLevel(app, 0x4578ff, map, {
   blockSize: size,
-  moveSpeed: 300,
+  moveSpeed: config.moveSpeed,
 });
 app.world = level;
 
@@ -50,6 +50,7 @@ function loadMusic() {
   const audioListener = new THREE.AudioListener();
   level.camera.add(audioListener);
   const bgm = new THREE.Audio(audioListener);
+  window.bgm = bgm;
   const winSound = new THREE.Audio(audioListener);
 
   level.scene.add(bgm);
@@ -59,7 +60,14 @@ function loadMusic() {
     'audio/bgm.mp3',
     (audioBuffer) => {
       bgm.setBuffer(audioBuffer);
-      bgm.play();
+      // bgm.play();
+
+      const autoPlayAfterAnyClick = () => {
+        bgm.play();
+        document.removeEventListener('click', autoPlayAfterAnyClick);
+      };
+      document.addEventListener('click', autoPlayAfterAnyClick);
+
       bgm.setLoop(true);
     },
   );
@@ -113,7 +121,9 @@ loader.load('models/Mario/mario.dae', (collada) => {
     charactor.play('idle');
     level.setCharactor(charactor);
   });
-  createBoneAnimation(elf.children[1].skeleton.bones, 'mario_clear', 'win', false, 16);
+  createBoneAnimation(elf.children[1].skeleton.bones, 'mario_clear', 'win', false, 16, () => {
+    //
+  });
   createBoneAnimation(elf.children[1].skeleton.bones, 'mario_ladder', 'ladder', true, 16);
   for (const mesh of elf.children) {
     if (mesh.material) {

@@ -1,13 +1,13 @@
 const map = {
   background: 0xfff,
   levelBoard: {
-    life: 2500,
+    life: 3500,
     duration: 1000,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     info: [{
       type: 'pic',
       src: 'img/common/border.png',
-      height: 0.1,
+      height: 0.08,
       y: 0.15,
     }, {
       type: 'text',
@@ -21,13 +21,13 @@ const map = {
       type: 'text',
       text: '孙剑峰 & 徐畅',
       family: '微软雅黑',
-      size: 0.07,
-      y: 0.37,
+      size: 0.05,
+      y: 0.36,
       color: '#ffffff',
       weight: 'bolder',
     }, {
       type: 'text',
-      text: '─────',
+      text: '───────────',
       family: '微软雅黑',
       size: 0.02,
       y: 0.45,
@@ -35,10 +35,18 @@ const map = {
       weight: 'bold',
     }, {
       type: 'text',
-      text: '婚礼',
+      text: '邀您见证',
       family: '微软雅黑',
       size: 0.03,
-      y: 0.5,
+      y: 0.55,
+      color: '#ffffff',
+      weight: 'bolder',
+    }, {
+      type: 'text',
+      text: '心世界的旅程',
+      family: '微软雅黑',
+      size: 0.04,
+      y: 0.62,
       color: '#ffffff',
       weight: 'bolder',
     }, {
@@ -51,7 +59,7 @@ const map = {
       weight: 'bold',
     }, {
       type: 'text',
-      text: '请柬',
+      text: '',
       family: '微软雅黑',
       size: 0.04,
       y: 0.7,
@@ -60,7 +68,7 @@ const map = {
     }, {
       type: 'pic',
       src: 'img/common/border.png',
-      height: 0.1,
+      height: 0.08,
       y: 0.85,
     }],
   },
@@ -1174,7 +1182,18 @@ const map = {
           app.world.scene.remove(app.world.childrenWithId.key);
           app.world.charactor.play('win');
           app.world.winSound.play();
-        });
+          window.bgm.pause();
+
+          // 这个世界最好看的时候，就是和你在一起，一旦再相见，必是人间殊胜
+
+          setTimeout(() => {
+            const outer = document.querySelector('.video');
+            outer.style.display = 'flex';
+
+            const video = document.querySelector('video');
+            video.play();
+          }, 2000);
+        }, 0);
       },
     },
     t10: {
