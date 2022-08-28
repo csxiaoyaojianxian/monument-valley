@@ -1,7 +1,7 @@
 const map = {
   background: 0xfff,
   levelBoard: {
-    life: 3500,
+    life: 1500,
     duration: 1000,
     backgroundColor: 'rgba(0,0,0,0.8)',
     info: [{
@@ -96,6 +96,13 @@ const map = {
     }],
   },
   onGameStart() {
+    document.getElementsByClassName('cover')[0].style.opacity = 0;
+    document.getElementsByClassName('cover2')[0].style.opacity = 0;
+    document.getElementsByClassName('preloader')[0].style.display = 'none';
+    setTimeout(() => {
+      document.getElementsByClassName('cover')[0].style.display = 'none';
+      document.getElementsByClassName('cover2')[0].style.display = 'none';
+    }, 1000);
     app.world.childrenWithId.turn.gameState = 0;
   },
   blocks: [{
@@ -1192,6 +1199,14 @@ const map = {
 
             const video = document.querySelector('video');
             video.play();
+            setTimeout(() => {
+              document.getElementsByClassName('cover')[0].style.display = 'block';
+              document.getElementsByClassName('cover2')[0].style.display = 'block';
+            }, 26000);
+            setTimeout(() => {
+              document.getElementsByClassName('cover')[0].style.opacity = 1;
+              document.getElementsByClassName('cover2')[0].style.opacity = 1;
+            }, 27000);
           }, 2000);
         }, 0);
       },
