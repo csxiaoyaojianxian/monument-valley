@@ -1194,18 +1194,20 @@ const map = {
           // 这个世界最好看的时候，就是和你在一起，一旦再相见，必是人间殊胜
 
           setTimeout(() => {
-            const outer = document.querySelector('.video');
-            outer.style.display = 'flex';
-
-            const video = document.querySelector('video');
-            video.play();
-            setTimeout(() => {
-              document.getElementsByClassName('cover')[0].style.display = 'block';
-              document.getElementsByClassName('cover2')[0].style.display = 'block';
-            }, 26000);
+            document.getElementsByClassName('cover')[0].style.display = 'block';
+            document.getElementsByClassName('cover2')[0].style.display = 'block';
             setTimeout(() => {
               document.getElementsByClassName('cover')[0].style.opacity = 1;
               document.getElementsByClassName('cover2')[0].style.opacity = 1;
+            }, 1000);
+
+            const outer = document.querySelector('.video');
+            outer.style.display = 'flex';
+            const video = document.querySelector('video');
+            video.play();
+
+            setTimeout(() => {
+              outer.style.opacity = 0;
             }, 27000);
           }, 2000);
         }, 0);
